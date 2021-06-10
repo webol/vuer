@@ -1,0 +1,69 @@
+name: drupal-outline
+recipe: drupal9
+config:
+  php: '7.4'
+services:
+  drupaltest:
+    type: mysql
+    creds:
+      user:  drupaltest
+      password: drupaltest
+      database: drupaltest
+  appserver:
+    scanner: false
+    webroot: web
+    xdebug: true
+    config:
+      php: php.ini
+    run:
+      - echo ''
+      - echo ''
+      - echo '#######################################################################################'
+      - echo ''
+      - echo 'One more step:'
+      - echo '  Run `lando site-setup` to initialize the Drupal database and enable required modules'
+      - echo ''
+      - echo '#######################################################################################'
+      - echo ''
+      - echo ''
+  node:
+    type: node:10
+    ssl: false
+    command: tail -f /dev/null
+    port: 3000
+  phpmyadmin:
+      type: phpmyadmin
+      hosts: []
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+node:
+  service: node
+npm:
+  service: node
+proxy:
+  mailhog:
+    - mail.drupal-outline.lndo.site
+tooling:
+  phpunitdebug:
+    service: appserver
+    cmd: php -d xdebug.remote_port=9003 /app/vendor/bin/phpunit -c /app/phpunit.xml /app/web/modules/outline/tests/src/Kernel/EntryKernelTest.php --filter='testEntryDelete'
+  testEntryDelete:
+    service: appserver
+    cmd: "php /app/vendor/bin/phpunit -c /app/phpunit.xml /app/web/modules/outline/tests/src/Kernel/EntryKernelTest.php --filter='testEntryDelete'"
+  site-setup:
+    service: appserver
+    description: "Install the Drupal Vue Outline client for development."
+    cmd:
+      - if [ ! -d "outline" ]; then git clone --branch 8.x-1.x git@git.drupal.org:project/outline.git && rm -f web/modules/outline && ln -s ../../outline web/modules/outline; fi
+      - if [ -f "settings.php" ]; then mv settings.php web/sites/default; fi
+      - if [ -f "settings.local.php" ]; then mv settings.local.php web/sites/default; fi
+      - if [ -f "services.yml" ]; then mv services.yml web/sites/default; fi
+      - drush -y site-install standard --account-pass admin --site-name "Drupal Outline" --db-url mysql://drupal9:drupal9@database/drupal9
+      - drush -y en content_moderation, media, media_library, workflows
+      - drush -y en admin_toolbar, admin_toolbar_tools, admin_toolbar_links_access_filter, admin_toolbar_search
+      - drush -y en ctools, devel, druxt, graphql, paragraphs, pathauto, token
+      - drush -y en outline, outline_graphql
+      - drush cr
+      - drush status

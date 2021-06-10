@@ -1,0 +1,23 @@
+query Outline ($oid: Int!) {
+  outline(oid: $oid) {
+    name
+    oid
+    rootEntry {
+      childCount
+      children {
+        childCount
+        content
+        eid
+        expanded
+        name
+        parentEid
+        rendered
+      }
+      content
+      eid
+      expanded
+      name
+      rendered
+    }
+  }
+}

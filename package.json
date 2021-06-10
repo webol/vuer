@@ -1,0 +1,29 @@
+{
+  "name": "vue-outline",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "clean": "rm -f package-lock.json && rm -f packages/api/package-lock.json && rm -f packages/outline/package-lock.json && rm -rf node_modules && rm -rf packages/api/node_modules && rm -rf packages/outline/node_modules",
+    "init:drupal:windows": "cp -R scripts/drupal packages/drupal && cd packages/drupal && composer install && lando poweroff && lando start && lando site-setup",
+    "init:drupal:mac": "cp -R scripts/drupal packages/drupal && cd packages/drupal && /usr/local/bin/composer.phar install && lando poweroff && lando start && lando site-setup",
+    "lint": "lerna run lint --parallel --stream",
+    "postinstall": "lerna bootstrap",
+    "serve": "node scripts/serve.js",
+    "start": "cd packages/drupal && lando start"
+  },
+  "engines": {
+    "node": ">= 14"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "cross-spawn": "^7.0.3",
+    "eslint": "^7.27.0",
+    "lerna": "^4.0.0",
+    "lodash": "^4.17.21"
+  },
+  "dependencies": {
+    "jshint": "^2.13.0"
+  }
+}

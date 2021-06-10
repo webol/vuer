@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+
+
+    {
+      "name": "Listen for XDebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9003,
+      "log": true,
+      "pathMappings": {
+        "/app/": "${workspaceFolder}/packages/drupal",
+      }
+    },
+    {
+      "name": "PhpUnit dummy",
+      "type": "php",
+      "request": "launch",
+      "port": 9001,
+      "log": true,
+    }
+  ],
+  "compounds": [
+    {
+      "name": "PhpUnit",
+      "configurations": [
+        "Listen for XDebug",
+        "PhpUnit dummy"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+mutation addEntry($parentEid: Int!) {
+  addEntry (parentEid: $parentEid)
+}

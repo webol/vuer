@@ -1,0 +1,3 @@
+mutation renameEntry($eid: Int!) {
+  renameEntry (eid: $eid)
+}
