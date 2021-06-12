@@ -1,8 +1,8 @@
-# Vue Outline
+# Vuer
 
 ## Introduction
 
-The Vue Outline project is a Vuetify based single page app that uses a Drupal instance running the Drupal Outline module as a backend.  Vue Outline provides an improved interface for Drupal content editors, using the Material Design Component library, drag and drop functionality, workflow integration, etc.  The Drupal GraphQL module combined with a node.js server is used for communication between the Vue app and the Drupal back end.
+The Vuer project is a Vuetify based single page app that uses a Drupal instance running the Drupal Outline module as a backend.  Vue Outline provides an improved interface for Drupal content editors, using the Material Design Component library, drag and drop functionality, workflow integration, etc.  The Drupal GraphQL module combined with a node.js server is used for communication between the Vue app and the Drupal back end.
 
 Primary capabilities supported:
 
