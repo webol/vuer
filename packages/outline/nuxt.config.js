@@ -66,13 +66,13 @@ export default {
     errorHandler: '@/apollo/errorHandler.js',
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://drupal-outline.lndo.site/outline-graphql',
+        httpEndpoint: 'http://webol.org/outline-graphql',
       },
     },
   },
 
   druxt: {
-    baseUrl: 'http://drupal-outline.lndo.site/',
+    baseUrl: 'http://webol.org/',
     schema: {
       filter: ['node--.*?--view'],
     },

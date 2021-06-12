@@ -4,7 +4,7 @@ import { keyBy } from 'lodash'
 export const state = () => ({
   selected: undefined,
   servers: [
-    { id: '1234', name: 'Server 1', uri: 'http://drupal-outline.lndo.site/outline-graphql', disabled: false },
+    { id: '1234', name: 'Server 1', uri: 'http://webol.org/outline-graphql', disabled: false },
   ],
   outlines: {},
 })
