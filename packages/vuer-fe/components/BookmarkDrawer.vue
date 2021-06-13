@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
     app
+    color="grey darken-4"
     clipped
     mini-variant
     permanent

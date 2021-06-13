@@ -6,18 +6,12 @@
 
     <toolbar />
 
-    <splitpanes>
+    <splitpanes id="vuer-panels">
       <pane size="15" min-size="15" style="overflow-y: auto;">
         <v-progress-linear
           :active="loading"
           indeterminate
         />
-
-        <!-- gwc-menu
-          branding = "Decoupled Menu Test"
-          baseUrl = "http://decoupled-menus.jsonapi.dev"
-          menuId = "account"
-          ></gwc-menu -->
 
         <treeview
           :active.sync="active"
@@ -46,7 +40,7 @@
           </pane>
           <pane>
             <v-row class="fill-height">
-              <v-col style="height: 100%" cols="12">
+              <v-col style="height: 100%" cols="12" class="ma-2">
                 {{ active }}
                 <span>{{ renderedContent.content }}</span>
               </v-col>
@@ -63,7 +57,6 @@
 import { computed, reactive, watch } from '@nuxtjs/composition-api'
 import { difference, find } from 'lodash'
 import pathify from '@/utils/pathify'
-// import { GdwcMenu } from '@gdwc/components/menu';
 
 // components
 import { Pane, Splitpanes } from 'splitpanes'
@@ -189,4 +182,11 @@ export default {
   .main-container
     padding: 0px
     height: calc(100vh - 48px - 56px)
+
+  #vuer-panels
+    .splitpanes__pane
+      background-color: #181818
+
+    .splitpanes__splitter
+      background-color: #363636
 </style>

@@ -4,8 +4,8 @@
 
     <v-app-bar
       app
+      color="blue-grey darken-3"
       clipped-left
-      color="primary"
       height="56"
       dark
     >

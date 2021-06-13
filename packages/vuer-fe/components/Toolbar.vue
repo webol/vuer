@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="transparent" dense>
+  <v-toolbar color="grey darken-4" dense>
     <template v-for="(laItem, la) in leftActions">
       <v-divider
         v-if="laItem === 'divider'"
