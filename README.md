@@ -2,15 +2,19 @@
 
 ## Introduction
 
-The Vuer project is a Vuetify based single page app that uses a Drupal instance running the Drupal Outline module as a backend.  Vue Outline provides an improved interface for Drupal content editors, using the Material Design Component library, drag and drop functionality, workflow integration, etc.  The Drupal GraphQL module combined with a node.js server is used for communication between the Vue app and the Drupal back end.
+Vuer is a Vue.js single page app that uses a Drupal instance running the Drupal Outline module as a backend.  The app provides an improved interface for Drupal content editors, using the Vuetify / Material Design Component library, drag and drop functionality, undo/redo, workflow integration, etc.  The Drupal GraphQL module is used for communication between the Vue app and the Drupal back end. The app was built using DruxtJS https://www.drupal.org/project/druxt, which provides integration with Vue's Nuxt.js framework. There is also a node.js app that provides support for Druxt pre-rendering and Pupetteer for screen scraping.
 
 Primary capabilities supported:
 
-- An app based interface for Drupal content editing.
+- An app based content editing interface for Drupal.
+- An app based administrative interface for Drupal.
 - A more efficient way to publish a "book" of content.
-- An administrative interface for Drupal.
 
-A Drupal Outline is conceptually similar to a Drupal Book, except that an outline may contain any entity type, not just nodes.  Vue Outline will support editing of Drupal entities using Pupetteer for screen scraping of Drupal node editing pages, which means that a custom GraphQL configuration is not required for editing of custom content types.  The screen scaping technology is also useful for providing administrative functionality, for example the screen scraper can execute the Drupal Admin UI Site Status page periodically and cache the output so that the current status information is instantly available.
+A Drupal Outline is conceptually similar to a Drupal Book, except that an outline may contain any Drupal entity type, not just nodes.  Vue Outline supports editing of Drupal entities using Druxt editing components, see github.com/druxt/druxt-entity.
+
+An outline is composed of outline entries organized in a heirarchy.  An outline entry is by default just a title and long text field for simple content. Optionally, an outline entry can represent any drupal entity, which is accomplished using Drupal's entity reference capability.
+
+Pupetteer is planned for screen scraping of Drupal node editing pages.  The screen scaping technology is useful for automating repetitive content editing tasks.  Screen scraping also makes possible communication to Drupal when functionality is needed that is not provided by the json api or graphql configuration. For example the screen scraper could scrape the Drupal Admin UI Site Status page periodically and cache the output so that the current status information is instantly available to app users.
 
 ## Project setup
 
@@ -24,6 +28,11 @@ git clone git@github.com:captaindav/vue-outline
 cd vue-outline
 npm i
 ```
+At this point you can run the app, as it is pointed to a test back-end located on webol.org:
+```bash
+npm run serve
+```
+If you want a full Drupal installation for your local development environment, continue with the steps that follow.
 
 ### Step 2: Initialize Drupal
 
@@ -90,13 +99,13 @@ lando site-setup
 ## Packages
 
 - api
-  - Simple express api server.
-  - Can use puppeteer.
+  - Simple express api server
+  - Can use puppeteer
 - drupal
-  - Main dev/drupal environment
+  - Drupal environment running in Docker/Lando
   - Only generated when following the Initialize Drupal development server instructions above
-- outline
-  - Main vue-outline client/application
+- vuer-fe
+  - Main vuer client/application front end
   - Requires drupal server to function
 
 ## General repository commands
@@ -115,7 +124,7 @@ lando site-setup
 
 - `serve`: Starts express api server
 
-### outline package
+### vuer-fe package
 
 - `build`: Compiles and minifies outline client for production
 - `lint`: Lints and fixes outline client files
