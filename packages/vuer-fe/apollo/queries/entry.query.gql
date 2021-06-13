@@ -8,6 +8,7 @@ query Entry ($eid: Int!) {
       name
       parentEid
       rendered
+      uuid
     }
     childCount
     content
@@ -16,5 +17,6 @@ query Entry ($eid: Int!) {
     name
     parentEid
     rendered
+    uuid
   }
 }

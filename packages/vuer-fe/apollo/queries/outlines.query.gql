@@ -8,6 +8,7 @@ query Outlines {
         expanded
         name
         rendered
+        uuid
       }
     }
   }

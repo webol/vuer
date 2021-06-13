@@ -12,12 +12,14 @@ query Outline ($oid: Int!) {
         name
         parentEid
         rendered
+        uuid
       }
       content
       eid
       expanded
       name
       rendered
+      uuid
     }
   }
 }

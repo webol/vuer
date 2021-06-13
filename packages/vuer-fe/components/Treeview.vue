@@ -1,7 +1,7 @@
 <template>
   <v-treeview
     activatable
-    item-key="eid"
+    item-key="uuid"
     item-text="name"
     item-children="children"
     transition
