@@ -21,13 +21,13 @@
             <v-icon>mdi-cog</v-icon>
           </v-btn>
         </template>
-        <span>Outline Servers</span>
+        <span>Drupal Servers</span>
       </v-tooltip>
     </template>
 
     <v-card height="400px">
       <v-card-title class="py-2">
-        Outline Servers
+        Drupal Servers
         <v-spacer />
         <v-btn
           fab
