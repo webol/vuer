@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Vuer is a Vue.js single page app that uses a Drupal instance running the Drupal Outline module as a backend.  The app provides an improved interface for Drupal content editors, using the Vuetify / Material Design Component library, drag and drop functionality, undo/redo, workflow integration, etc.  The Drupal GraphQL module is used for communication between the Vue app and the Drupal back end. The app was built using DruxtJS https://www.drupal.org/project/druxt, which provides integration with Vue's Nuxt.js framework. There is also a node.js app that provides support for Druxt pre-rendering and Pupetteer for screen scraping.
+Vuer is a Vue.js single page app that uses a Drupal instance running the Drupal Outline module as a backend.  The app provides an improved interface for Drupal content editors, using the Vuetify / Material Design Component library, drag and drop functionality, undo/redo, workflow integration, etc.
 
 Primary capabilities supported:
 
@@ -13,6 +13,8 @@ Primary capabilities supported:
 A Drupal Outline is conceptually similar to a Drupal Book, except that an outline may contain any Drupal entity type, not just nodes.  Vue Outline supports editing of Drupal entities using Druxt editing components, see github.com/druxt/druxt-entity.
 
 An outline is composed of outline entries organized in a heirarchy.  An outline entry is by default just a title and long text field for simple content. Optionally, an outline entry can represent any drupal entity, which is accomplished using Drupal's entity reference capability.
+
+The Drupal GraphQL module is used for communication between the Vue app and the Drupal back end. The app was built using DruxtJS https://www.drupal.org/project/druxt, which provides integration with Vue's Nuxt.js framework. There is also a node.js app that provides support for Druxt pre-rendering and Pupetteer for screen scraping.  The Druxt components use JSON API. 
 
 Pupetteer is planned for screen scraping of Drupal node editing pages.  The screen scaping technology is useful for automating repetitive content editing tasks.  Screen scraping also makes possible communication to Drupal when functionality is needed that is not provided by the json api or graphql configuration. For example the screen scraper could scrape the Drupal Admin UI Site Status page periodically and cache the output so that the current status information is instantly available to app users.
 
