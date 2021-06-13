@@ -1,7 +1,7 @@
 {
   "packages": [
     "packages/api",
-    "packages/outline"
+    "packages/vuer-fe"
   ],
   "version": "0.1.0"
 }
