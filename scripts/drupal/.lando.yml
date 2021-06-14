@@ -54,7 +54,7 @@ tooling:
     cmd: "php /app/vendor/bin/phpunit -c /app/phpunit.xml /app/web/modules/outline/tests/src/Kernel/EntryKernelTest.php --filter='testEntryDelete'"
   site-setup:
     service: appserver
-    description: "Install the Drupal Vue Outline client for development."
+    description: "Install a local Drupal development environment."
     cmd:
       - if [ ! -d "outline" ]; then git clone --branch 8.x-1.x git@git.drupal.org:project/outline.git && rm -f web/modules/outline && ln -s ../../outline web/modules/outline; fi
       - if [ -f "settings.php" ]; then mv settings.php web/sites/default; fi

@@ -11,7 +11,7 @@
     >
       <v-toolbar-title>
         <h1 class="text-h6">
-          Vue Outline
+          Vuer
         </h1>
       </v-toolbar-title>
       <v-spacer />
