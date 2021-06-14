@@ -10,9 +10,11 @@ Primary capabilities supported:
 - An app based administrative interface for Drupal.
 - A more efficient way to publish a "book" of content.
 
-A Drupal Outline is conceptually similar to a Drupal Book, except that an outline may contain any Drupal entity type, not just nodes.  Vue Outline supports editing of Drupal entities using Druxt editing components, see github.com/druxt/druxt-entity.
+A Drupal Outline is conceptually similar to a Drupal Book, except that an outline may contain any Drupal entity type, not just nodes.  Vuer supports editing of Drupal entities using Druxt editing components, see github.com/druxt/druxt-entity.
 
-An outline is composed of outline entries organized in a heirarchy.  An outline entry is by default just a title and long text field for simple content. Optionally, an outline entry can represent any drupal entity, which is accomplished using Drupal's entity reference capability.
+The Drupal Outline module is based on the Drupal Core Taxonomy module, where a Vocabulary is an Outline, and a Term is an Entry. One big difference is that the Taxonomy module supports Terms having more than one parent, whereas an Entry can have only one parent.
+
+An outline is composed of outline entries organized in a heirarchy.  An outline entry is by default just a title and long text field for simple content. Optionally, an outline entry can represent any Drupal entity, which is accomplished using Drupal's entity reference capability. Each outline has one top level entry called the root entry.
 
 The Drupal GraphQL module is used for communication between the Vue app and the Drupal back end. The app was built using DruxtJS https://www.drupal.org/project/druxt, which provides integration with Vue's Nuxt.js framework. There is also a node.js app that provides support for Druxt pre-rendering and Pupetteer for screen scraping.  The Druxt components use JSON API. 
 
