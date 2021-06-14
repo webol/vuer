@@ -10,13 +10,11 @@ Primary capabilities supported:
 - An app based administrative interface for Drupal.
 - A more efficient way to publish a "book" of content.
 
-A Drupal Outline is conceptually similar to a Drupal Book, except that an Outline may contain references to any Drupal entity type, not just nodes.  
-
-An Outline is composed of Outline Entries organized in a heirarchy.  An Entry is by default just a title and a long text field for simple content. Optionally, an Entry can represent any Drupal entity, which is accomplished using Drupal's entity reference capability. Each Outline has a single top level Entry called the Root Entry.
+A Drupal Outline is conceptually similar to a Drupal Book, except that an Outline may contain references to any Drupal entity type, not just nodes.   An Outline is composed of Outline Entries organized in a heirarchy.  An Entry is by default just a title and a long text field for simple content. Optionally, an Entry can represent any Drupal entity, which is accomplished using Drupal's Entity Reference capability. Each Outline has a single top level Entry called the Root Entry.
 
 The Drupal Outline module is based on the Drupal Core Taxonomy module, where a Vocabulary is an Outline, and a Term is an Entry. One difference is that the Taxonomy module supports Terms having more than one parent, whereas an Entry can have only one parent. Another difference is that Terms can have custom fields, whereas Entries do not support custom fields.  This is because an Entry can reference any Drupal Entity type, including ones that have custom fields, and thus custom fields are not needed for the Entries themselves.  
 
-Vuer uses the Drupal [DruxtJS](https://www.drupal.org/project/druxt) module, which provides integration with Vue's Nuxt.js framework. The Drupal [GraphQL](drupal.org/project/graphql) module is used for communication between the Vuer app and the Drupal back end. There is also a node.js app that provides support for Druxt pre-rendering and Pupetteer for screen scraping.  
+Vuer was built using the Drupal [DruxtJS](https://drupal.org/project/druxt) module, which provides integration with Vue's Nuxt.js framework. The Drupal [GraphQL](https://drupal.org/project/graphql) module is used for communication between the Vuer app and the Drupal back end. There is also a node.js app that provides support for Druxt pre-rendering and Pupetteer for screen scraping.  
 
 Vuer supports editing of Drupal entities using Druxt editing components, see github.com/druxt/druxt-entity. Note that the Druxt components use JSON API, rather than GraphQL, for communication with the Drupal backend.
 
