@@ -12,12 +12,12 @@
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.1-rc.5",
     "@nuxtjs/composition-api": "^0.24.4",
-    "core-js": "^3.14.0",
-    "druxt": "^0.7.0",
-    "druxt-entity": "^0.14.2",
+    "core-js": "^3.15.0",
+    "druxt": "^0.8.0",
+    "druxt-entity": "^0.15.0",
     "druxt-menu": "^0.10.3",
     "druxt-schema": "^0.7.7",
-    "nuxt": "^2.15.3",
+    "nuxt": "^2.15.7",
     "socket.io-client": "^4.1.2",
     "vue-socket.io-extended": "^4.2.0"
   },
