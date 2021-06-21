@@ -15,9 +15,7 @@
         </h1>
       </v-toolbar-title>
       <v-spacer />
-      
-      <!-- <DruxtEntity type="node--article" uuid="2df755ce-a8a1-4df7-882e-cf1e36b5b610" /> -->
-      
+       
       <v-spacer />
 
       <v-dialog
@@ -118,13 +116,6 @@ export default {
       const page = await call('socket-io/getPage')
       return page
     }
-
-    /*
-    const { DruxtClient } = require('druxt')
-    const druxt = new DruxtClient('http://drupal-outline.lndo.site/')
-    const collection = druxt.getCollection('node--article')
-    console.log('test', collection)
-    */
 
     // initialize server outlines
     call('servers/init')
