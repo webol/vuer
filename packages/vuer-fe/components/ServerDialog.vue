@@ -118,6 +118,7 @@
             <template #activator="{ attrs, on }">
               <v-btn
                 v-bind="attrs"
+                :disabled="eAction.disabled"
                 icon
                 fab
                 small
@@ -143,6 +144,8 @@
             v-model="editItem.uri"
             label="Uri"
             outlined
+            :disabled="!isNew"
+            @input="validate"
           />
           <v-checkbox
             v-model="editItem.disabled"
@@ -157,6 +160,7 @@
 <script>
 import pathify from '@/utils/pathify'
 import { reactive, ref } from '@nuxtjs/composition-api'
+import { debounce } from 'lodash'
 
 export default {
   name: 'ServerDialog',
@@ -165,20 +169,22 @@ export default {
     const dialog = ref(false)
     const edit = ref(false)
     const isNew = ref(false)
-    const { sync } = pathify(context)
+    const { call, sync } = pathify(context)
     const selected = sync('servers/selected')
     const servers = sync('servers/servers')
 
     const editDefault = {
+      disabled: false,
+      id: null,
       name: '',
       uri: '',
-      disabled: false,
     }
 
     let editItem = reactive({
+      disabled: false,
+      id: null,
       name: '',
       uri: '',
-      disabled: false,
     })
 
     const addServer = () => {
@@ -228,6 +234,12 @@ export default {
       cancel()
     }
 
+    const validate = debounce(async (val) => {
+      const uuid = await call('servers/getServerUuid', val)
+      console.log('validates', uuid)
+      editItem.id = uuid
+    }, 700)
+
     const editActions = {
       save: { click: save, icon: 'mdi-content-save' },
       cancel: { click: cancel, icon: 'mdi-cancel' },
@@ -251,6 +263,7 @@ export default {
       serverActions,
       servers,
       selected,
+      validate,
     }
   },
 }
