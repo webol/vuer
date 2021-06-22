@@ -46,13 +46,14 @@ Mac OSX:```bash npm run init:drupal:mac```
 
 Windows:```bash npm run init:drupal:windows```
 
-### Step 3: Set Drupal GraphQL Permissions
+### Step 3: Set Drupal GraphQL and Druxt Permissions
 
 - Login at [http://drupal-outline.lndo.site/user](http://drupal-outline.lndo.site/user), username=admin password=admin
 - Navigate to: [http://drupal-outline.lndo.site/admin/people/permissions](http://drupal-outline.lndo.site/admin/people/permissions) and give the Anonymous role the GraphQL permissions:
 -- Outline: Execute arbitrary requests
 -- Outline: Execute persisted requests
-
+and the DruxtJS permission:
+-- Access DruxtJS JSON:API resources
 ### Step 4: VS Code Configuration
 
 - In the top level vue-outline directory:
