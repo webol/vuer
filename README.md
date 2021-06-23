@@ -29,8 +29,8 @@ Before installation, make sure you have Drupal account set up with git access, S
 ### Step 1: Clone and install the Vue project
 
 ```bash
-git clone git@github.com:captaindav/vue-outline
-cd vue-outline
+git clone git@github.com:captaindav/vuer
+cd vuer
 npm i
 ```
 At this point you can run the app, as it is pointed to a test back-end located on webol.org:
@@ -56,7 +56,7 @@ and the DruxtJS permission:
 -- Access DruxtJS JSON:API resources
 ### Step 4: VS Code Configuration
 
-- In the top level vue-outline directory:
+- In the top level vuer directory:
 
 ```bash
 mkdir .vscode
