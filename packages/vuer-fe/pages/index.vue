@@ -19,7 +19,7 @@
       <v-spacer />
 
       <v-dialog
-        v-model="drupalDialog"
+        v-model="serverDialog"
         max-width="400px"
       >   
         <template #activator="{ on: don, attrs: dattrs }">
@@ -78,7 +78,7 @@
           </v-tooltip>
         </template>
         <v-card height="300px">
-          {{ aboutText }}
+          <br><br>{{ aboutText }}<br><br><br><br><br><br><br>{{ tmText }}
         </v-card>
       </v-dialog>
     </v-app-bar>
@@ -89,8 +89,8 @@
 </template>
 
 <script>
-import pathify from '@/utils/pathify'
 
+import pathify from '@/utils/pathify'
 import BookmarkDrawer from '@/components/BookmarkDrawer'
 import Outline from '@/components/Outline'
 import ServerDialog from '@/components/ServerDialog'
@@ -107,15 +107,18 @@ export default {
   setup (props, context) {
     const { call, get } = pathify(context)
     const aboutDialog = false
-    const aboutText = 'About Text'
-    const drupalDialog = false
+    const aboutText = 
+    `This app provides an improved UI for Drupal. 
+     Built using Vue.js, Vuetify and Druxt.`
+    const tmText = 
+    `Drupal is a registered trademark of Dries Buytaert.`
+    const serverDialog = false
     const drupalText = get('socket-io/data')
-    const loading = get('socket-io/loading')
-
     const getPageData = async function () {
       const page = await call('socket-io/getPage')
       return page
     }
+    const loading = get('socket-io/loading')
 
     // initialize server outlines
     call('servers/init')
@@ -123,8 +126,9 @@ export default {
     return {
       aboutDialog,
       aboutText,
-      drupalDialog,
-      drupalText,
+      tmText,
+      serverDialog,
+        drupalText,
       getPageData,
       loading,
     }
