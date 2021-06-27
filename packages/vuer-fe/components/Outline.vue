@@ -4,10 +4,11 @@
 
     <edit-dialog />
 
-    <toolbar />
 
     <splitpanes id="vuer-panels">
       <pane size="15" min-size="15" style="overflow-y: auto;">
+        <nav-toolbar />
+
         <v-progress-linear
           :active="loading"
           indeterminate
@@ -62,9 +63,9 @@ import pathify from '@/utils/pathify'
 
 // components
 import { Pane, Splitpanes } from 'splitpanes'
-import Toolbar from './Toolbar'
 import ContextMenu from './ContextMenu'
 import EditDialog from './EditDialog'
+import NavToolbar from './NavToolbar'
 import Treeview from './Treeview'
 import 'splitpanes/dist/splitpanes.css'
 
@@ -75,9 +76,9 @@ export default {
   components: {
     ContextMenu,
     EditDialog,
+    NavToolbar,
     Pane,
     Splitpanes,
-    Toolbar,
     Treeview,
   },
   setup (props, context) {
