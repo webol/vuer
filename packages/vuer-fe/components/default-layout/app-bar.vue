@@ -15,7 +15,7 @@
       
     <v-spacer />
 
-    <DrupalDialog />
+    <DrupalDialog v-if="false" />
 
     <ServerDialog />
 
