@@ -12,16 +12,9 @@
 
 <script>
 import pathify from '@/utils/pathify'
-import AppBar from '@/components/default-layout/app-bar'
-import NavigationDrawer from '@/components/default-layout/navigation-drawer'
 
 export default {
   name: 'IndexPage',
-
-  components: {
-    AppBar,
-    NavigationDrawer,
-  },
 
   setup (props, context) {
     const { call } = pathify(context)

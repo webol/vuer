@@ -59,14 +59,9 @@
 <script>
 import pathify from '@/utils/pathify'
 import { watch } from '@nuxtjs/composition-api'
-import BookmarksDialog from '@/components/default-layout/bookmarks-dialog'
 
 export default {
   name: 'NavigationDrawer',
-
-  components: {
-    BookmarksDialog,
-  },
 
   setup (props, context) {
     const { sync } = pathify(context)

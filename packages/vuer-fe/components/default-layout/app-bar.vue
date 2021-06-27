@@ -24,18 +24,8 @@
 </template>
 
 <script>
-import AboutDialog from '@/components/default-layout/about-dialog'
-import DrupalDialog from '@/components/default-layout/drupal-dialog'
-import ServerDialog from '@/components/default-layout/server-dialog'
-
 export default {
   name: 'AppBar',
-
-  components: {
-    AboutDialog,
-    DrupalDialog,
-    ServerDialog,
-  },
 
   setup (props, context) {
     const title = 'Vuer'

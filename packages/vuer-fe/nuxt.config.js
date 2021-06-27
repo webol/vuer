@@ -25,7 +25,11 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components',
+    { path: '~/components/default-layout/', prefix: '' },
+    { path: '~/components/index-page/', prefix: '' },
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

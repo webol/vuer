@@ -43,26 +43,14 @@ import pathify from '@/utils/pathify'
 
 // components
 import { Pane, Splitpanes } from 'splitpanes'
-import ChipPane from '@/components/index-page/chip-pane'
-import ContentPane from '@/components/index-page/content-pane'
-import ContextMenu from '@/components/index-page/context-menu'
-import EditDialog from '@/components/index-page/edit-dialog'
-import Treeview from '@/components/treeview'
-import TreeviewPaneToolbar from '@/components/index-page/treeview-pane-toolbar'
 import 'splitpanes/dist/splitpanes.css'
 
 export default {
   name: 'IndexPage',
 
   components: {
-    ChipPane,
-    ContentPane,
-    ContextMenu,
-    EditDialog,
     Pane,
     Splitpanes,
-    Treeview,
-    TreeviewPaneToolbar,
   },
 
   setup (props, context) {

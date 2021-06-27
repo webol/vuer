@@ -18,14 +18,9 @@
 <script>
 import { reactive } from '@nuxtjs/composition-api'
 import { getMenuActions } from '@/utils/menu-actions'
-import OutlineDialog from '@/components/index-page/outline-dialog'
 
 export default {
   name: 'TreeviewPaneToolbar',
-
-  components: {
-    OutlineDialog,
-  },
 
   setup (props, context) {
     const {
