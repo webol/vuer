@@ -1,17 +1,12 @@
 <template>
   <v-toolbar color="grey darken-4" dense>
-    <template v-for="(action, name) in actions">
-      <OutlineDialog
-        v-if="action === 'outline-dialog'"
-        :key="`action-${name}`"
-      />
-
-      <ToolbarBtn
-        v-else
-        :key="`action-${name}`"
-        v-bind="{ ...action }"
-      />
-    </template>
+    <component
+      v-for="(action, name) in actions"
+      :key="`action-${name}`"
+      :is="action.is"
+      v-bind="{ ...action }"
+    />
+      
   </v-toolbar>
 </template>
 
@@ -29,8 +24,10 @@ export default {
     } = getMenuActions(context)
 
     const actions = reactive({
-      open: 'outline-dialog',
-      close: { clickAction: closeOutline, disabled: disabledClose, icon: 'mdi-book-remove', tooltip: 'Close Outline' },
+      open: { is: 'outline-dialog' },
+      close: { is: 'toolbar-btn', clickAction: closeOutline, disabled: disabledClose, icon: 'mdi-book-remove', tooltip: 'Close Outline' },
+      expandAll: { is: 'toolbar-btn', icon: 'mdi-expand-all', tooltip: 'Expand All' },
+      collapseAll: { is: 'toolbar-btn', icon: 'mdi-collapse-all', tooltip: 'Collapse All' },
     })
 
     return {

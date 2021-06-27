@@ -4,25 +4,13 @@
     persistent
     max-width="500px"
   >
-    <template #activator="{ on: don, attrs: dattrs }">
-      <v-tooltip bottom>
-        <template #activator="{ on: tton, attrs: ttattrs }">
-          <v-btn
-            icon
-            v-bind="{
-              ...dattrs,
-              ...ttattrs
-            }"
-            v-on="{
-              ...don,
-              ...tton
-            }"
-          >
-            <v-icon>mdi-cog</v-icon>
-          </v-btn>
-        </template>
-        <span>Drupal Servers</span>
-      </v-tooltip>
+    <template #activator="{ on, attrs }">
+       <ToolbarBtn
+        v-on="on"
+        v-bind="attrs"
+        icon="mdi-cog"
+        tooltip="Drupal Servers"
+      />
     </template>
 
     <v-card height="400px">
@@ -46,28 +34,13 @@
           class="px-2"
           dense
         >
-          <v-tooltip
+          <ToolbarBtn
             v-for="(sAction, sa) in serverActions"
             :key="`sa-${sa}`"
-            bottom
-          >
-            <template #activator="{ attrs, on }">
-              <v-btn
-                v-bind="attrs"
-                :disabled="sa !== 'add' && selected === undefined"
-                icon
-                fab
-                small
-                v-on="{
-                  ...on,
-                  click: sAction.click
-                }"
-              >
-                <v-icon v-text="sAction.icon" />
-              </v-btn>
-            </template>
-            <span class="text-capitalize">{{ sa }} Server</span>
-          </v-tooltip>
+            v-bind="sAction"
+            :disabled="sa !== 'add' && selected === undefined"
+            :tooltip="sa"
+          />
         </v-toolbar>
 
         <v-list
@@ -110,28 +83,12 @@
           class="px-2"
           dense
         >
-          <v-tooltip
+          <ToolbarBtn
             v-for="(eAction, ea) in editActions"
             :key="`ea-${ea}`"
-            bottom
-          >
-            <template #activator="{ attrs, on }">
-              <v-btn
-                v-bind="attrs"
-                :disabled="eAction.disabled"
-                icon
-                fab
-                small
-                v-on="{
-                  ...on,
-                  click: eAction.click
-                }"
-              >
-                <v-icon v-text="eAction.icon" />
-              </v-btn>
-            </template>
-            <span class="text-capitalize">{{ ea }}</span>
-          </v-tooltip>
+            v-bind="eAction"
+            :tooltip="ea"
+          />
         </v-toolbar>
 
         <v-form class="pa-6">
@@ -241,16 +198,16 @@ export default {
     }, 700)
 
     const editActions = {
-      save: { click: save, icon: 'mdi-content-save' },
-      cancel: { click: cancel, icon: 'mdi-cancel' },
+      save: { clickAction: save, icon: 'mdi-content-save' },
+      cancel: { clickAction: cancel, icon: 'mdi-cancel' },
     }
 
     const serverActions = {
-      add: { click: addServer, icon: 'mdi-plus' },
-      edit: { click: editServer, icon: 'mdi-pencil' },
-      delete: { click: deleteServer, icon: 'mdi-delete' },
-      disable: { click: disableServer, icon: 'mdi-cancel' },
-      enable: { click: enableServer, icon: 'mdi-check' },
+      add: { clickAction: addServer, icon: 'mdi-plus' },
+      edit: { clickAction: editServer, icon: 'mdi-pencil' },
+      delete: { clickAction: deleteServer, icon: 'mdi-delete' },
+      disable: { clickAction: disableServer, icon: 'mdi-cancel' },
+      enable: { clickAction: enableServer, icon: 'mdi-check' },
     }
 
     return {

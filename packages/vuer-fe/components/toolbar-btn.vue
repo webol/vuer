@@ -8,6 +8,8 @@
         }"
         :disabled="disabled"
         icon
+        fab
+        small
         v-on="{
           ...on,
           click: clickAction,

@@ -18,7 +18,7 @@
             }"
           >
             <v-list-item-icon>
-              <v-icon></v-icon>
+              <v-icon>mdi-cogs</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content />
@@ -55,28 +55,13 @@
           class="px-2"
           dense
         >
-          <v-tooltip
+          <ToolbarBtn
             v-for="(bAction, ba) in bookmarkActions"
             :key="`ba-${ba}`"
-            bottom
-          >
-            <template #activator="{ attrs, on }">
-              <v-btn
-                v-bind="attrs"
-                :disabled="ba !== 'add' && selected === undefined"
-                icon
-                fab
-                small
-                v-on="{
-                  ...on,
-                  click: bAction.click
-                }"
-              >
-                <v-icon v-text="bAction.icon" />
-              </v-btn>
-            </template>
-            <span class="text-capitalize">{{ ba }} Bookmark</span>
-          </v-tooltip>
+            v-bind="bAction"
+            :disabled="ba !== 'add' && selected === undefined"
+            :tooltip="ba"
+          />
         </v-toolbar>
 
         <v-list
@@ -108,27 +93,12 @@
           class="px-2"
           dense
         >
-          <v-tooltip
+          <ToolbarBtn
             v-for="(eAction, ea) in editActions"
             :key="`ea-${ea}`"
-            bottom
-          >
-            <template #activator="{ attrs, on }">
-              <v-btn
-                v-bind="attrs"
-                icon
-                fab
-                small
-                v-on="{
-                  ...on,
-                  click: eAction.click
-                }"
-              >
-                <v-icon v-text="eAction.icon" />
-              </v-btn>
-            </template>
-            <span class="text-capitalize">{{ ea }} Bookmark</span>
-          </v-tooltip>
+            v-bind="eAction"
+            :tooltip="`${ea} Bookmark`"
+          />
         </v-toolbar>
 
         <v-form class="pa-6 pb-0">
@@ -273,14 +243,14 @@ export default {
     }
 
     const bookmarkActions = {
-      add: { click: addBookmark, icon: 'mdi-plus' },
-      edit: { click: editBookmark, icon: 'mdi-pencil' },
-      delete: { click: deleteBookmark, icon: 'mdi-delete' },
+      add: { clickAction: addBookmark, icon: 'mdi-plus' },
+      edit: { clickAction: editBookmark, icon: 'mdi-pencil' },
+      delete: { clickAction: deleteBookmark, icon: 'mdi-delete' },
     }
 
     const editActions = {
-      save: { click: save, icon: 'mdi-content-save' },
-      cancel: { click: cancel, icon: 'mdi-cancel' },
+      save: { clickAction: save, icon: 'mdi-content-save' },
+      cancel: { clickAction: cancel, icon: 'mdi-cancel' },
     }
 
     return {
