@@ -6,7 +6,7 @@
 
     <Splitpanes id="vuer-panels">
       <Pane size="15" min-size="15" style="overflow-y: auto;">
-        <NavToolbar />
+        <TreeviewPaneToolbar />
 
         <v-progress-linear
           :active="loading"
@@ -23,30 +23,11 @@
       </Pane>
       <Pane>
         <Splitpanes horizontal>
-          <Pane :size="activeItem && activeItem.children && activeItem.children.length ? 20 : 0" style="overflow-y: auto">
-            <v-chip-group
-              v-if="activeItem && activeItem.children"
-              class="px-2 py-1"
-              column
-            >
-              <v-chip
-                v-for="(child, ind) in activeItem.children || []"
-                :key="`node-chip-${ind}`"
-                @click="treeViewLabelClick(child, true)"
-              >
-                {{ child.name }}
-              </v-chip>
-            </v-chip-group>
+          <Pane :size="chipPaneSize" style="overflow-y: auto">
+            <ChipPane  />
           </Pane>
           <Pane>
-            <v-row class="fill-height">
-              <v-col style="height: 100%" cols="12" class="ma-2">
-                {{ active }}
-                <span>{{ renderedContent.content }}</span>
-                <!-- <DruxtEntity type="node--article" uuid="8439bb73-82eb-4755-b1d1-6d4d8b62f050" /> -->
-                <!-- <DruxtEntityForm type="node--article" uuid="8439bb73-82eb-4755-b1d1-6d4d8b62f050" /> -->
-              </v-col>
-            </v-row>
+            <ContentPane />
           </Pane>
         </Splitpanes>
       </Pane>
@@ -62,32 +43,30 @@ import pathify from '@/utils/pathify'
 
 // components
 import { Pane, Splitpanes } from 'splitpanes'
-import ContextMenu from '@/components/context-menu'
-import EditDialog from '@/components/edit-dialog'
-import NavToolbar from '@/components/nav-toolbar'
-import Treeview from '@/components/base/treeview'
+import ChipPane from '@/components/index-page/chip-pane'
+import ContentPane from '@/components/index-page/content-pane'
+import ContextMenu from '@/components/index-page/context-menu'
+import EditDialog from '@/components/index-page/edit-dialog'
+import Treeview from '@/components/treeview'
+import TreeviewPaneToolbar from '@/components/index-page/treeview-pane-toolbar'
 import 'splitpanes/dist/splitpanes.css'
 
 export default {
   name: 'IndexPage',
 
   components: {
+    ChipPane,
+    ContentPane,
     ContextMenu,
     EditDialog,
-    NavToolbar,
     Pane,
     Splitpanes,
     Treeview,
+    TreeviewPaneToolbar,
   },
+
   setup (props, context) {
     const { call, get, sync } = pathify(context)
-
-    /*
-      const { DruxtClient } = require('druxt')
-      const druxt = new DruxtClient('http://webol.org')
-      const collection = druxt.getCollection('node--article')
-      console.log('test', collection)
-    */
 
     // drawer getters
     const selectedOutlines = get('bookmarks/outlines')
@@ -125,12 +104,11 @@ export default {
       return toutlines.value.filter(item => outlines.includes(item.eid))
     })
 
-    const renderedContent = reactive({ content: '' })
-    const treeViewLabelClick = async (item, chip) => {
-      renderedContent.content = item.rendered
-      if (chip) {
-        await call('treeview/setActive', [item.eid])
-      }
+    const chipPaneSize = computed(() => {
+      return activeItem?.value?.children?.length ? 20 : 0
+    })
+
+    const treeViewLabelClick = async (item) => {
       await call('treeview/setActiveItem', item)
     }
 
@@ -174,12 +152,12 @@ export default {
     return {
       active,
       activeItem,
+      chipPaneSize,
       items,
       loading,
       loadChildren,
       open,
       openMenu,
-      renderedContent,
       treeViewLabelClick,
     }
   },

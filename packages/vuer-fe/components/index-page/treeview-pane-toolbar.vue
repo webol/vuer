@@ -33,10 +33,10 @@
 <script>
 import { reactive } from '@nuxtjs/composition-api'
 import { getMenuActions } from '@/utils/menu-actions'
-import OutlineDialog from './outline-dialog'
+import OutlineDialog from '@/components/index-page/outline-dialog'
 
 export default {
-  name: 'NavToolbar',
+  name: 'TreeviewPaneToolbar',
 
   components: {
     OutlineDialog,
