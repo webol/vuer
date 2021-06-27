@@ -6,26 +6,11 @@
         :key="`action-${name}`"
       />
 
-      <v-tooltip
+      <ToolbarBtn
         v-else
         :key="`action-${name}`"
-        bottom
-      >
-        <template #activator="{ attrs, on }">
-          <v-btn
-            v-bind="attrs"
-            :disabled="action.disabled"
-            icon
-            v-on="{
-              ...on,
-              click: action.click
-            }"
-          >
-            <v-icon v-text="action.icon" />
-          </v-btn>
-        </template>
-        <span class="text-capitalize">{{ name }}</span>
-      </v-tooltip>
+        v-bind="{ ...action }"
+      />
     </template>
   </v-toolbar>
 </template>
@@ -50,7 +35,7 @@ export default {
 
     const actions = reactive({
       open: 'outline-dialog',
-      close: { click: closeOutline, disabled: disabledClose, icon: 'mdi-book-remove' },
+      close: { clickAction: closeOutline, disabled: disabledClose, icon: 'mdi-book-remove', tooltip: 'Close Outline' },
     })
 
     return {

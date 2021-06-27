@@ -25,7 +25,7 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  // components: true,
+  components: true,
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
