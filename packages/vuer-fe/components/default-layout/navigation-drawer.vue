@@ -59,10 +59,10 @@
 <script>
 import pathify from '@/utils/pathify'
 import { watch } from '@nuxtjs/composition-api'
-import BookmarksDialog from './bookmarks-dialog'
+import BookmarksDialog from '@/components/default-layout/bookmarks-dialog'
 
 export default {
-  name: 'BookmarkDrawer',
+  name: 'NavigationDrawer',
 
   components: {
     BookmarksDialog,

@@ -1,150 +1,200 @@
 <template>
-  <v-app>
-    <BookmarkDrawer />
+  <v-container fluid class="main-container">
+    <ContextMenu />
 
-    <v-app-bar
-      app
-      color="blue-grey darken-3"
-      clipped-left
-      height="56"
-      dark
-    >
-      <v-toolbar-title>
-        <h1 class="text-h6">
-          Vuer
-        </h1>
-      </v-toolbar-title>
-      <v-spacer />
-       
-      <v-spacer />
+    <EditDialog />
 
-      <v-dialog
-        v-model="serverDialog"
-        max-width="400px"
-      >   
-        <template #activator="{ on: don, attrs: dattrs }">
-          <v-tooltip bottom>
-            <template #activator="{ on: tton, attrs: ttattrs }">
-              <v-btn
-                icon
-                v-bind="{
-                  ...dattrs,
-                  ...ttattrs
-                }"
-                v-on="{
-                  ...don,
-                  ...tton
-                }"
-                @click="getPageData"
+    <Splitpanes id="vuer-panels">
+      <Pane size="15" min-size="15" style="overflow-y: auto;">
+        <NavToolbar />
+
+        <v-progress-linear
+          :active="loading"
+          indeterminate
+        />
+
+        <Treeview
+          :active.sync="active"
+          :items="items"
+          :load-children="loadChildren"
+          :open.sync="open"
+          v-bind="{ openMenu, treeViewLabelClick }"
+        />
+      </Pane>
+      <Pane>
+        <Splitpanes horizontal>
+          <Pane :size="activeItem && activeItem.children && activeItem.children.length ? 20 : 0" style="overflow-y: auto">
+            <v-chip-group
+              v-if="activeItem && activeItem.children"
+              class="px-2 py-1"
+              column
+            >
+              <v-chip
+                v-for="(child, ind) in activeItem.children || []"
+                :key="`node-chip-${ind}`"
+                @click="treeViewLabelClick(child, true)"
               >
-                <v-icon>mdi-server</v-icon>
-              </v-btn>
-            </template>
-            <span>Get Drupal Details</span>
-          </v-tooltip>
-        </template>
-        <v-card
-          height="300px"
-          :loading="loading"
-        >
-          {{ drupalText }}
-        </v-card>
-      </v-dialog>
-
-      <ServerDialog />
-
-      <v-dialog
-        v-model="aboutDialog"
-        max-width="400px"
-      >
-        <template #activator="{ on: don, attrs: dattrs }">
-          <v-tooltip bottom>
-            <template #activator="{ on: tton, attrs: ttattrs }">
-              <v-btn
-                icon
-                v-bind="{
-                  ...dattrs,
-                  ...ttattrs
-                }"
-                v-on="{
-                  ...don,
-                  ...tton
-                }"
-              >
-                <v-icon>mdi-information-outline</v-icon>
-              </v-btn>
-            </template>
-            <span>About</span>
-          </v-tooltip>
-        </template>
-        <v-card height="300px">
-          <div class="d-flex flex-column justify-space-between fill-height pa-4">
-            <div>{{ aboutText }}</div>
-            <div>{{ tmText }}</div>
-          </div>
-        </v-card>
-      </v-dialog>
-    </v-app-bar>
-    <v-main>
-      <Outline />
-    </v-main>
-  </v-app>
+                {{ child.name }}
+              </v-chip>
+            </v-chip-group>
+          </Pane>
+          <Pane>
+            <v-row class="fill-height">
+              <v-col style="height: 100%" cols="12" class="ma-2">
+                {{ active }}
+                <span>{{ renderedContent.content }}</span>
+                <!-- <DruxtEntity type="node--article" uuid="8439bb73-82eb-4755-b1d1-6d4d8b62f050" /> -->
+                <!-- <DruxtEntityForm type="node--article" uuid="8439bb73-82eb-4755-b1d1-6d4d8b62f050" /> -->
+              </v-col>
+            </v-row>
+          </Pane>
+        </Splitpanes>
+      </Pane>
+    </Splitpanes>
+  </v-container>
 </template>
 
 <script>
-
+// utilities
+import { computed, reactive, watch } from '@nuxtjs/composition-api'
+import { difference, find } from 'lodash'
 import pathify from '@/utils/pathify'
-import BookmarkDrawer from '@/components/bookmark-drawer'
-import Outline from '@/components/outline'
-import ServerDialog from '@/components/server-dialog'
+
+// components
+import { Pane, Splitpanes } from 'splitpanes'
+import ContextMenu from '@/components/context-menu'
+import EditDialog from '@/components/edit-dialog'
+import NavToolbar from '@/components/nav-toolbar'
+import Treeview from '@/components/base/treeview'
+import 'splitpanes/dist/splitpanes.css'
 
 export default {
   name: 'IndexPage',
 
   components: {
-    BookmarkDrawer,
-    Outline,
-    ServerDialog,
+    ContextMenu,
+    EditDialog,
+    NavToolbar,
+    Pane,
+    Splitpanes,
+    Treeview,
   },
-
   setup (props, context) {
-    const { call, get } = pathify(context)
-    const aboutDialog = false
-    const aboutText = `
-      This app provides an improved UI for Drupal.
-      Built using Vue.js, Vuetify and Druxt.`
-    const tmText = `Drupal is a registered trademark of Dries Buytaert.`
-    const serverDialog = false
-    const drupalText = get('socket-io/data')
-    const getPageData = async function () {
-      const page = await call('socket-io/getPage')
-      return page
-    }
-    const loading = get('socket-io/loading')
+    const { call, get, sync } = pathify(context)
 
-    // initialize server outlines
-    call('servers/init')
+    /*
+      const { DruxtClient } = require('druxt')
+      const druxt = new DruxtClient('http://webol.org')
+      const collection = druxt.getCollection('node--article')
+      console.log('test', collection)
+    */
+
+    // drawer getters
+    const selectedOutlines = get('bookmarks/outlines')
+    const isBookmark = get('bookmarks/active')
+    const open = sync('graphql/opened')
+
+    // loading getters
+    const isFetchingEntries = get('graphql/isFetchingEntries')
+    const isFetchingOutlines = get('graphql/isFetchingOutlines')
+    const loading = computed(() => {
+      return isFetchingOutlines.value || isFetchingEntries.value
+    })
+
+    // treeview props
+    const active = sync('treeview/active')
+    const activeItem = get('treeview/activeItem')
+
+    // outline getters
+    const toutlines = get('graphql/outlines')
+    const aOutlines = get('graphql/activeOutlines')
+    const entries = get('graphql/entries')
+
+    // actions
+    const openMenu = (e, item) => {
+      return call('context-menu/openMenu', { e, item })
+    }
+
+    // init outline fetch
+    const items = computed(() => {
+      const bookmark = !!isBookmark?.value || 0
+      const outlines = bookmark
+        ? selectedOutlines?.value || []
+        : aOutlines?.value || []
+
+      return toutlines.value.filter(item => outlines.includes(item.eid))
+    })
+
+    const renderedContent = reactive({ content: '' })
+    const treeViewLabelClick = async (item, chip) => {
+      renderedContent.content = item.rendered
+      if (chip) {
+        await call('treeview/setActive', [item.eid])
+      }
+      await call('treeview/setActiveItem', item)
+    }
+
+    const loadChildren = async (entry) => {
+      const { eid, server } = entry
+      console.log('loading children for:', eid, 'server', server)
+      const { children } = await call('graphql/fetchEntry', { eid, server })
+      children.forEach((child) => {
+        child.server = server
+      })
+      entry.children = children
+      return children
+    }
+
+    watch(open, (val, prevVal) => {
+      // may need to add debounce
+      const expandItems = difference(val, prevVal)
+      const collapseItems = difference(prevVal, val)
+      console.log('diff', expandItems, collapseItems)
+      if (expandItems.length) {
+        for (const item of expandItems) {
+          const entry = find(entries.value, { eid: item })
+          if (entry) {
+            console.log('open', entry)
+            call('graphql/expandEntry', entry)
+          }
+        }
+      }
+
+      if (collapseItems.length) {
+        for (const item of collapseItems) {
+          const entry = find(entries.value, { eid: item })
+          if (entry) {
+            console.log('close', entry)
+            call('graphql/collapseEntry', entry)
+          }
+        }
+      }
+    })
 
     return {
-      aboutDialog,
-      aboutText,
-      tmText,
-      serverDialog,
-      drupalText,
-      getPageData,
+      active,
+      activeItem,
+      items,
       loading,
+      loadChildren,
+      open,
+      openMenu,
+      renderedContent,
+      treeViewLabelClick,
     }
   },
-
 }
 </script>
 
 <style lang="sass">
-  .splitpanes--vertical > .splitpanes__splitter
-    min-width: 4px
-    background: rgba(0,0,0,.2)
+  .main-container
+    padding: 0px
+    height: calc(100vh - 48px - 56px)
 
-  .splitpanes--horizontal > .splitpanes__splitter
-    min-height: 4px
-    background: rgba(0,0,0,.2)
+  #vuer-panels
+    .splitpanes__pane
+      background-color: #181818
+
+    .splitpanes__splitter
+      background-color: #363636
 </style>
