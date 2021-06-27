@@ -78,7 +78,10 @@
           </v-tooltip>
         </template>
         <v-card height="300px">
-          <br><br>{{ aboutText }}<br><br><br><br><br><br><br>{{ tmText }}
+          <div class="d-flex flex-column justify-space-between fill-height pa-4">
+            <div>{{ aboutText }}</div>
+            <div>{{ tmText }}</div>
+          </div>
         </v-card>
       </v-dialog>
     </v-app-bar>
@@ -107,11 +110,10 @@ export default {
   setup (props, context) {
     const { call, get } = pathify(context)
     const aboutDialog = false
-    const aboutText = 
-    `This app provides an improved UI for Drupal. 
-     Built using Vue.js, Vuetify and Druxt.`
-    const tmText = 
-    `Drupal is a registered trademark of Dries Buytaert.`
+    const aboutText = `
+      This app provides an improved UI for Drupal.
+      Built using Vue.js, Vuetify and Druxt.`
+    const tmText = `Drupal is a registered trademark of Dries Buytaert.`
     const serverDialog = false
     const drupalText = get('socket-io/data')
     const getPageData = async function () {
@@ -128,7 +130,7 @@ export default {
       aboutText,
       tmText,
       serverDialog,
-        drupalText,
+      drupalText,
       getPageData,
       loading,
     }
