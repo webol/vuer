@@ -3,26 +3,13 @@
     v-model="dialog"
     max-width="400px"
   >   
-    <template #activator="{ on: don, attrs: dattrs }">
-      <v-tooltip bottom>
-        <template #activator="{ on: tton, attrs: ttattrs }">
-          <v-btn
-            icon
-            v-bind="{
-              ...dattrs,
-              ...ttattrs
-            }"
-            v-on="{
-              ...don,
-              ...tton
-            }"
-            @click="getPageData"
-          >
-            <v-icon>mdi-server</v-icon>
-          </v-btn>
-        </template>
-        <span>Get Drupal Details</span>
-      </v-tooltip>
+    <template #activator="{ on, attrs }">
+      <ToolbarBtn
+        v-on="on"
+        v-bind="attrs"
+        icon="mdi-server"
+        tooltip="Get Drupal Details"
+      />
     </template>
     <v-card
       height="300px"

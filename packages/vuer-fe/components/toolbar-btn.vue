@@ -2,12 +2,16 @@
   <v-tooltip bottom>
     <template #activator="{ attrs, on }">
       <v-btn
-        v-bind="attrs"
+        v-bind="{
+          ...$attrs,
+          ...attrs,
+        }"
         :disabled="disabled"
         icon
         v-on="{
           ...on,
-          click: clickAction
+          click: clickAction,
+          ...$listeners,
         }"
       >
         <v-icon v-text="icon" />
@@ -20,6 +24,8 @@
 <script>
 export default {
   name: 'ToolbarBtn',
+  
+  inheritAttrs: false,
 
   props: {
     clickAction: {

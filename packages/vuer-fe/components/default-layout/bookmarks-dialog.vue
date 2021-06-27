@@ -18,7 +18,7 @@
             }"
           >
             <v-list-item-icon>
-              <v-icon>mdi-cogs</v-icon>
+              <v-icon></v-icon>
             </v-list-item-icon>
 
             <v-list-item-content />

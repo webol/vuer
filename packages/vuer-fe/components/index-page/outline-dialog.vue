@@ -4,25 +4,13 @@
     persistent
     max-width="500px"
   >
-    <template #activator="{ on: don, attrs: dattrs }">
-      <v-tooltip bottom>
-        <template #activator="{ on: tton, attrs: ttattrs }">
-          <v-btn
-            icon
-            v-bind="{
-              ...dattrs,
-              ...ttattrs
-            }"
-            v-on="{
-              ...don,
-              ...tton
-            }"
-          >
-            <v-icon>mdi-book-plus</v-icon>
-          </v-btn>
-        </template>
-        <span>Open Outline</span>
-      </v-tooltip>
+    <template #activator="{ on, attrs }">
+      <ToolbarBtn
+        v-on="on"
+        v-bind="attrs"
+        icon="mdi-book-plus"
+        tooltip="Open Outline"
+      />
     </template>
     <v-card height="600px">
       <v-card-title class="py-2">

@@ -3,25 +3,13 @@
     v-model="dialog"
     max-width="400px"
   >
-    <template #activator="{ on: don, attrs: dattrs }">
-      <v-tooltip bottom>
-        <template #activator="{ on: tton, attrs: ttattrs }">
-          <v-btn
-            icon
-            v-bind="{
-              ...dattrs,
-              ...ttattrs
-            }"
-            v-on="{
-              ...don,
-              ...tton
-            }"
-          >
-            <v-icon>mdi-information-outline</v-icon>
-          </v-btn>
-        </template>
-        <span>About</span>
-      </v-tooltip>
+    <template #activator="{ on, attrs }">
+      <ToolbarBtn
+        v-on="on"
+        v-bind="attrs"
+        icon="mdi-information-outline"
+        tooltip="About"
+      />
     </template>
     <v-card height="300px">
       <div class="d-flex flex-column justify-space-between fill-height pa-4">
