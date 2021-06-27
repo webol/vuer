@@ -1,8 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - outline-nuxt',
-    title: 'outline-nuxt',
+    titleTemplate: '%s - Vuer',
+    title: 'Vuer',
     htmlAttrs: {
       lang: 'en',
     },
