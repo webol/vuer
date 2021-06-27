@@ -26,8 +26,8 @@
 </template>
 <script>
 export default {
-
   name: 'Treeview',
+
   props: {
     openMenu: {
       type: Function,

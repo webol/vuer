@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <bookmark-drawer />
+    <BookmarkDrawer />
 
     <v-app-bar
       app
@@ -51,7 +51,7 @@
         </v-card>
       </v-dialog>
 
-      <server-dialog />
+      <ServerDialog />
 
       <v-dialog
         v-model="aboutDialog"
@@ -86,7 +86,7 @@
       </v-dialog>
     </v-app-bar>
     <v-main>
-      <outline />
+      <Outline />
     </v-main>
   </v-app>
 </template>
@@ -94,12 +94,12 @@
 <script>
 
 import pathify from '@/utils/pathify'
-import BookmarkDrawer from '@/components/BookmarkDrawer'
-import Outline from '@/components/Outline'
-import ServerDialog from '@/components/ServerDialog'
+import BookmarkDrawer from '@/components/bookmark-drawer'
+import Outline from '@/components/outline'
+import ServerDialog from '@/components/server-dialog'
 
 export default {
-  name: 'App',
+  name: 'IndexPage',
 
   components: {
     BookmarkDrawer,

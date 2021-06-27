@@ -175,7 +175,7 @@ import pathify from '@/utils/pathify'
 import { computed, reactive, ref } from '@nuxtjs/composition-api'
 
 export default {
-  name: 'OutlineBookmarks',
+  name: 'BookmarksDialog',
 
   setup (props, context) {
     const dialog = ref(false)

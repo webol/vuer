@@ -1,7 +1,7 @@
 <template>
   <v-toolbar color="grey darken-4" dense>
     <template v-for="(action, name) in actions">
-      <outline-dialog
+      <OutlineDialog
         v-if="action === 'outline-dialog'"
         :key="`action-${name}`"
       />
@@ -33,7 +33,7 @@
 <script>
 import { reactive } from '@nuxtjs/composition-api'
 import { getMenuActions } from '@/utils/menu-actions'
-import OutlineDialog from './OutlineDialog'
+import OutlineDialog from './outline-dialog'
 
 export default {
   name: 'NavToolbar',

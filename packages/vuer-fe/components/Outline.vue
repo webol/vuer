@@ -1,30 +1,30 @@
 <template>
   <v-container fluid class="main-container">
-    <context-menu />
+    <ContextMenu />
 
-    <edit-dialog />
+    <EditDialog />
 
 
-    <splitpanes id="vuer-panels">
-      <pane size="15" min-size="15" style="overflow-y: auto;">
-        <nav-toolbar />
+    <Splitpanes id="vuer-panels">
+      <Pane size="15" min-size="15" style="overflow-y: auto;">
+        <NavToolbar />
 
         <v-progress-linear
           :active="loading"
           indeterminate
         />
 
-        <treeview
+        <Treeview
           :active.sync="active"
           :items="items"
           :load-children="loadChildren"
           :open.sync="open"
           v-bind="{ openMenu, treeViewLabelClick }"
         />
-      </pane>
-      <pane>
-        <splitpanes horizontal>
-          <pane :size="activeItem && activeItem.children && activeItem.children.length ? 20 : 0" style="overflow-y: auto">
+      </Pane>
+      <Pane>
+        <Splitpanes horizontal>
+          <Pane :size="activeItem && activeItem.children && activeItem.children.length ? 20 : 0" style="overflow-y: auto">
             <v-chip-group
               v-if="activeItem && activeItem.children"
               class="px-2 py-1"
@@ -38,8 +38,8 @@
                 {{ child.name }}
               </v-chip>
             </v-chip-group>
-          </pane>
-          <pane>
+          </Pane>
+          <Pane>
             <v-row class="fill-height">
               <v-col style="height: 100%" cols="12" class="ma-2">
                 {{ active }}
@@ -48,10 +48,10 @@
                 <!-- <DruxtEntityForm type="node--article" uuid="8439bb73-82eb-4755-b1d1-6d4d8b62f050" /> -->
               </v-col>
             </v-row>
-          </pane>
-        </splitpanes>
-      </pane>
-    </splitpanes>
+          </Pane>
+        </Splitpanes>
+      </Pane>
+    </Splitpanes>
   </v-container>
 </template>
 
@@ -63,14 +63,13 @@ import pathify from '@/utils/pathify'
 
 // components
 import { Pane, Splitpanes } from 'splitpanes'
-import ContextMenu from './ContextMenu'
-import EditDialog from './EditDialog'
-import NavToolbar from './NavToolbar'
-import Treeview from './Treeview'
+import ContextMenu from './context-menu'
+import EditDialog from './edit-dialog'
+import NavToolbar from './nav-toolbar'
+import Treeview from './treeview'
 import 'splitpanes/dist/splitpanes.css'
 
 export default {
-
   name: 'Outline',
 
   components: {

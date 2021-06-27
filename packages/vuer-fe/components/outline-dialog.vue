@@ -55,13 +55,10 @@
 
 <script>
 import pathify from '@/utils/pathify'
-// import Treeview from './Treeview'
 import { computed } from '@nuxtjs/composition-api'
 
 export default {
   name: 'OutlineDialog',
-
-  // components: { Treeview },
 
   setup (props, context) {
     const dialog = false

@@ -51,7 +51,7 @@
     <template #append>
       <v-divider />
 
-      <bookmarks-dialog />
+      <BookmarksDialog />
     </template>
   </v-navigation-drawer>
 </template>
@@ -59,10 +59,10 @@
 <script>
 import pathify from '@/utils/pathify'
 import { watch } from '@nuxtjs/composition-api'
-import BookmarksDialog from './BookmarksDialog'
+import BookmarksDialog from './bookmarks-dialog'
 
 export default {
-  name: 'AppDrawer',
+  name: 'BookmarkDrawer',
 
   components: {
     BookmarksDialog,

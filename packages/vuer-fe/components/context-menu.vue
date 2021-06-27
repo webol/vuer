@@ -72,6 +72,8 @@
 import { getMenuActions } from '@/utils/menu-actions'
 
 export default {
+  name: 'ContextMenu',
+
   setup (props, context) {
     return {
       ...getMenuActions(context),

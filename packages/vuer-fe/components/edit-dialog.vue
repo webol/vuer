@@ -29,6 +29,8 @@ import { computed } from '@nuxtjs/composition-api'
 import pathify from '@/utils/pathify'
 
 export default {
+  name: 'EditDialog',
+  
   setup (props, context) {
     const { get, sync } = pathify(context)
     const activeItem = get('treeview/activeItem')
