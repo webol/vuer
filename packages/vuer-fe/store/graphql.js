@@ -4,6 +4,7 @@ import graphqlClient from '../apollo/client'
 // queries
 import outlinesQuery from '../apollo/queries/outlines.query.gql'
 import entryQuery from '../apollo/queries/entry.query.gql'
+import serverUuid from '../apollo/queries/server-uuid.query.gql'
 
 // mutations
 import addEntryMutation from '../apollo/mutations/addEntry.mutation.gql'
@@ -14,12 +15,13 @@ import renameEntryMutation from '../apollo/mutations/renameEntry.mutation.gql'
 import setParentMutation from '../apollo/mutations/setParentEntry.mutation.gql'
 
 export const state = () => ({
-  activeOutlines: [1, 5014],
+  activeOutlines: [1],
   clients: {},
   commands: {
     query: {
       outlinesQuery,
       entryQuery,
+      serverUuid,
     },
     mutate: {
       addEntryMutation,
@@ -132,6 +134,16 @@ export const actions = {
     commit('entries', [...state.entries, newEntry])
     commit('isFetchingOutlines', false)
     return newEntry
+  },
+  async fetchServerUuid (context, uri) {
+    const results = { uuid: null, error: null }
+    try {
+      const { data } = await graphqlClient(uri).query({ query: serverUuid, variables: {} })
+      results.uuid = data.serverUuid
+    } catch (e) {
+      results.error = 'server not found'
+    }
+    return results
   },
   generateClient ({ commit, state }, server) {
     const { id, uri } = server

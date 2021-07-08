@@ -86,12 +86,13 @@
           <ToolbarBtn
             v-for="(eAction, ea) in editActions"
             :key="`ea-${ea}`"
+            :disabled="ea === 'save' && !form.valid"
             v-bind="eAction"
             :tooltip="ea"
           />
         </v-toolbar>
 
-        <v-form class="pa-6">
+        <v-form v-model="form.valid" class="pa-6">
           <v-text-field
             v-model="editItem.name"
             label="Name"
@@ -101,6 +102,8 @@
             v-model="editItem.uri"
             label="Uri"
             outlined
+            :error="!!form.error"
+            :error-messages="form.error"
             :disabled="!isNew"
             @input="validate"
           />
@@ -136,12 +139,20 @@ export default {
       name: '',
       uri: '',
     }
-
     let editItem = reactive({
       disabled: false,
       id: null,
       name: '',
       uri: '',
+    })
+
+    const formDefault = {
+      error: 'Uri required',
+      valid: false,
+    }
+    let form = reactive({
+      error: 'Uri required',
+      valid: false,
     })
 
     const addServer = () => {
@@ -152,6 +163,7 @@ export default {
     const cancel = () => {
       edit.value = false
       editItem = Object.assign(editItem, editDefault)
+      form = Object.assign(form, formDefault)
     }
 
     const close = () => {
@@ -192,10 +204,15 @@ export default {
     }
 
     const validate = debounce(async (val) => {
-      const uuid = await call('servers/getServerUuid', val)
-      console.log('validates', uuid)
-      editItem.id = uuid
-    }, 700)
+      const results = await call('graphql/fetchServerUuid', val)
+      console.log('validates', results)
+      if (results?.error) {
+        form.error = results?.error
+      } else {
+        form.error = null
+        editItem.id = results.uuid
+      }
+    }, 1000)
 
     const editActions = {
       save: { clickAction: save, icon: 'mdi-content-save' },
@@ -216,6 +233,7 @@ export default {
       edit,
       editActions,
       editItem,
+      form,
       isNew,
       serverActions,
       servers,

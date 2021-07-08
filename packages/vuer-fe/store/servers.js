@@ -20,10 +20,6 @@ export const actions = {
     const combinedOutlines = Object.assign({}, { ...state.outlines, [id]: Object.keys(keyBy(outlines, 'eid')) })
     commit('outlines', combinedOutlines)
   },
-  async getServerUuid (/*{ commit, dispatch },*/context, server) {
-    console.log('validating server', server)
-    return '1234'
-  },
   async init ({ dispatch, state }) {
     for (const server of state.servers) {
       await dispatch('genServer', server)
