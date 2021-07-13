@@ -51,6 +51,10 @@
     <template #append>
       <v-divider />
 
+       <!--
+        Dialog for maintaining bookmarks
+        components/default-layout/bookmarks-dialog.vue
+      -->
       <BookmarksDialog />
     </template>
   </v-navigation-drawer>

@@ -1,11 +1,23 @@
 <template>
   <v-container fluid class="main-container">
+    <!--
+      Context menu component when clicking treeview items
+      components/index-page/context-menu.vue
+    -->
     <ContextMenu />
 
+    <!--
+     Dialog for drupal edit page via iframe - currently not in use - accesses by contextmenu - edit
+      components/index-page/edit-dialog.vue
+    -->
     <EditDialog />
 
     <Splitpanes id="vuer-panels">
       <Pane size="15" min-size="15" style="overflow-y: auto;">
+        <!--
+          toolbar in left pane that houses treeview actions
+          components/index-page/treeview-pane-toolbar.vue
+        -->
         <TreeviewPaneToolbar />
 
         <v-progress-linear
@@ -13,6 +25,10 @@
           indeterminate
         />
 
+        <!--
+          Main reusable treeview compoent used to display drupal tree
+          components/treeview.vue
+        -->
         <Treeview
           :active.sync="active"
           :items="items"
@@ -24,9 +40,17 @@
       <Pane>
         <Splitpanes horizontal>
           <Pane :size="chipPaneSize" style="overflow-y: auto">
+            <!--
+              Top right panel that hides/shows when an outline/entry has children
+              components/index-page/chip-pane.vue
+            -->
             <ChipPane  />
           </Pane>
           <Pane>
+            <!--
+              Bottom right panel thats used to show rendered content of selected outline/entry
+              components/index-page/content-pane.vue
+            -->
             <ContentPane />
           </Pane>
         </Splitpanes>
@@ -92,14 +116,17 @@ export default {
       return toutlines.value.filter(item => outlines.includes(item.eid))
     })
 
+    // hides and shows chip-pane
     const chipPaneSize = computed(() => {
       return activeItem?.value?.children?.length ? 20 : 0
     })
 
+    // sets active item when treeview label is clicked
     const treeViewLabelClick = async (item) => {
       await call('treeview/setActiveItem', item)
     }
 
+    // function for loading children when a treeview node is clicked
     const loadChildren = async (entry) => {
       const { eid, server } = entry
       console.log('loading children for:', eid, 'server', server)
@@ -111,6 +138,7 @@ export default {
       return children
     }
 
+    // expand collapse logic when a treeview node is open/closed
     watch(open, (val, prevVal) => {
       // may need to add debounce
       const expandItems = difference(val, prevVal)

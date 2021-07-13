@@ -1,6 +1,8 @@
+// helper functions used throughout vuer application 
 import { computed } from '@nuxtjs/composition-api'
 import pathify from '@/utils/pathify'
 
+// actions used in context-menu
 export function getMenuActions (context) {
   const { call, get, sync } = pathify(context)
   const activeOutlines = sync('graphql/activeOutlines')

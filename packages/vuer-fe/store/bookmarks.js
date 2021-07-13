@@ -1,3 +1,4 @@
+// store that maintains the state of bookmarks in the navigation drawer
 import { make } from 'vuex-pathify'
 
 export const state = () => ({

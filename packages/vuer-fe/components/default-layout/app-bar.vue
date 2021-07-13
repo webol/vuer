@@ -15,10 +15,22 @@
       
     <v-spacer />
 
+    <!--
+      Dialog for screen scraping via api/bartender - not in use
+      components/default-layout/drupal-dialog.vue
+    -->
     <DrupalDialog v-if="false" />
 
+     <!--
+      Dialog for maintaining servers
+      components/default-layout/server-dialog.vue
+    -->
     <ServerDialog />
 
+     <!--
+      Dialog displaying about information
+      components/default-layout/about-dialog.vue
+    -->
     <AboutDialog />
   </v-app-bar>
 </template>

@@ -1,3 +1,4 @@
+// store for maintaining servers
 import { make } from 'vuex-pathify'
 import { keyBy } from 'lodash'
 

@@ -1,3 +1,4 @@
+// store that maintains state of the context-menu
 import { make } from 'vuex-pathify'
 
 export const state = () => ({

@@ -1,3 +1,4 @@
+// store for all graphql related functionality
 import { make } from 'vuex-pathify'
 import graphqlClient from '../apollo/client'
 

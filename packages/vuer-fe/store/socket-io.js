@@ -1,3 +1,4 @@
+// store for socket-io connection - used for screen scraping/puppeteer
 import { make } from 'vuex-pathify'
 
 export const state = () => ({

@@ -1,3 +1,4 @@
+// store for maintaining the main drupal treeview
 import { make } from 'vuex-pathify'
 
 export const state = () => ({
