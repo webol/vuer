@@ -25,16 +25,18 @@ export default {
   name: 'TreeviewPaneToolbar',
 
   setup (props, context) {
+    
     const {
       closeOutline,
       disabledClose,
+      expandAll,
     } = getMenuActions(context)
 
     const actions = reactive({
       open: { is: 'outline-dialog' },
-      close: { is: 'toolbar-btn', clickAction: closeOutline, disabled: disabledClose, icon: 'mdi-book-remove', tooltip: 'Close Outline' },
+      close: { is: 'toolbar-btn', clickAction: closeOutline, icon: 'mdi-book-remove', tooltip: 'Close Outline', disabled: disabledClose },
       spacer: { is: 'v-spacer' },
-      expandAll: { is: 'toolbar-btn', icon: 'mdi-expand-all', tooltip: 'Expand All' },
+      expandAll: { is: 'toolbar-btn', clickAction: expandAll, icon: 'mdi-expand-all', tooltip: 'Expand All' },
       collapseAll: { is: 'toolbar-btn', icon: 'mdi-collapse-all', tooltip: 'Collapse All' },
     })
 

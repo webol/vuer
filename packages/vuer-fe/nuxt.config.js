@@ -70,7 +70,7 @@ export default {
     errorHandler: '@/apollo/errorHandler.js',
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://webol.org/outline-graphql',
+        httpEndpoint: 'http://vuerjs.org/graphql-test-endpoint',
       },
     },
   },
