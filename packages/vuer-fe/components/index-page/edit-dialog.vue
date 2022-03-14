@@ -39,7 +39,7 @@ export default {
     const src = computed(() => {
       const eid = activeItem && activeItem.value ? activeItem.value.eid : ''
       // const url = 'http://localhost:32770'
-      const url = 'http://webol.org'
+      const url = 'http://drupal-outline.lndo.site'
       return eid ? `${url}/outline/entry/${eid}/edit` : ''
     })
 

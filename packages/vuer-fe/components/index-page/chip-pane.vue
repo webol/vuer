@@ -26,7 +26,7 @@ export default {
 
     /*
       const { DruxtClient } = require('druxt')
-      const druxt = new DruxtClient('http://webol.org')
+      const druxt = new DruxtClient('http://drupal-outline.lndo.site')
       const collection = druxt.getCollection('node--article')
       console.log('test', collection)
     */

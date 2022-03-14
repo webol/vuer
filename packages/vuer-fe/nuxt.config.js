@@ -50,9 +50,9 @@ export default {
   modules: [
     // https://druxtjs.org/
     'druxt',
-    'druxt-entity',
-    'druxt-menu',
-    'druxt-schema',
+    //'druxt-entity',
+    //'druxt-menu',
+    //'druxt-schema',
   ],
 
   apollo: {
@@ -76,7 +76,7 @@ export default {
   },
 
   druxt: {
-    baseUrl: 'http://webol.org/',
+    baseUrl: 'http://drupal-outline.lndo.site',
     schema: {
       filter: ['node--.*?--view'],
     },
