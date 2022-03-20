@@ -1,0 +1,3 @@
+mutation collapseEntry($eid: Int!) {
+  collapseEntry (eid: $eid)
+}

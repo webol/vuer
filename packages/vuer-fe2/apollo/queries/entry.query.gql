@@ -1,0 +1,22 @@
+query Entry ($eid: Int!) {
+  entry(eid: $eid) {
+    children {
+      childCount
+      content
+      eid
+      expanded
+      name
+      parentEid
+      rendered
+      uuid
+    }
+    childCount
+    content
+    eid
+    expanded
+    name
+    parentEid
+    rendered
+    uuid
+  }
+}

@@ -1,0 +1,15 @@
+query Outlines {
+  outlines {
+    outlines {
+      rootEntry {
+        childCount
+        content
+        eid
+        expanded
+        name
+        rendered
+        uuid
+      }
+    }
+  }
+}
