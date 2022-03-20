@@ -43,7 +43,7 @@ export default {
     // https://github.com/nuxt-community/apollo-module
     '@nuxtjs/apollo',
     // https://composition-api.nuxtjs.org/
-    '@nuxtjs/composition-api/module',
+   // '@nuxtjs/composition-api/module',
   ],
   
   // Modules: https://go.nuxtjs.dev/config-modules
