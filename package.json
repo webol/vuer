@@ -24,6 +24,9 @@
     "lodash": "^4.17.21"
   },
   "dependencies": {
-    "jshint": "^2.13.4"
+    "express": "^4.17.3",
+    "jshint": "^2.13.4",
+    "puppeteer": "^13.5.1",
+    "socket.io": "^4.4.1"
   }
 }
