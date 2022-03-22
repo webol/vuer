@@ -1,5 +1,5 @@
 // helper functions used throughout vuer application 
-import { computed } from '@nuxtjs/composition-api'
+//import { computed } from '@nuxtjs/composition-api'
 import pathify from '@/utils/pathify'
 
 // actions used in context-menu

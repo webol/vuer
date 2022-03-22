@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Vuer is a Vue.js single page app that uses a Drupal instance running the Drupal Outline module as a backend.  The app provides an improved interface for Drupal content editors using the Vuetify / Material Design Component library.  Planned features related to content editing include drag and drop, undo/redo, copying nodes between Drupal servers, workflow integration, automation of bulk content editing and importation, etc.
+Vuer is a Vue 3 / Vuetify single page app that uses a Drupal instance running the Drupal Outline module as a backend.  The app provides an improved interface for Drupal content editors using the Vuetify / Material Design Component library.  Planned features related to content editing include drag and drop, undo/redo, copying nodes between Drupal servers, workflow integration, automation of bulk content editing and importation, etc.
 
 For a quick introduction to Vuer, check out the Introducing Vuer PDF file in the docs directory.
 

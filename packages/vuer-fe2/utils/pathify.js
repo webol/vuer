@@ -1,6 +1,6 @@
 // general pathify function used to connect vuex-pathify to vue3 setup()
 // https://github.com/davestewart/vuex-pathify/issues/95
-import { computed } from '@nuxtjs/composition-api'
+//import { computed } from '@nuxtjs/composition-api'
 export default (context) => {
   const { $store } = context.root
   const get = path => computed(() => $store.get(path))

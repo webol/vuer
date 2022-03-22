@@ -5,6 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 export default (uri) => {
   return new ApolloClient({
+
     link: createHttpLink({ uri }),
     cache: new InMemoryCache(),
   })

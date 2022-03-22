@@ -9,12 +9,12 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@nuxtjs/apollo": "^4.0.1-rc.5",
     "druxt": "^0.18.1",
     "druxt-entity": "^0.24.2",
     "druxt-menu": "^0.16.2",
     "druxt-schema": "^0.10.2",
     "nuxt": "^2.15.8",
+    "@nuxtjs/apollo": "^4.0.1-rc.5",
     "socket.io-client": "^4.4.1",
     "splitpanes": "^3.1.1",
     "vue-socket.io-extended": "^4.2.0",
