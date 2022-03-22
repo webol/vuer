@@ -12,9 +12,6 @@
     "serve": "node scripts/serve.js",
     "start": "cd packages/drupal && lando start"
   },
-  "engines": {
-    "node": ">= 17"
-  },
   "devDependencies": {
     "lerna": "^4.0.0",
     "lodash": "^4.17.21"
