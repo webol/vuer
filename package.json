@@ -1,16 +1,19 @@
 {
-  "name": "vuer",
+  "name": "@webol/vuer",
   "private": true,
   "version": "0.1.0",
   "scripts": {
     "build": "node scripts/build.js",
     "clean": "node scripts/clean.sh",
+    "dev": "lerna run dev",
     "init:drupal:windows": "cp -R scripts/drupal packages/drupal && cd packages/drupal && composer install && lando poweroff && lando start && lando site-setup",
     "init:drupal:mac": "cp -R scripts/drupal packages/drupal && cd packages/drupal && /usr/local/bin/composer.phar install && lando poweroff && lando start && lando site-setup",
     "lint": "lerna run lint --parallel --stream",
     "postinstall": "lerna bootstrap",
     "serve": "node scripts/serve.js",
-    "start": "cd packages/drupal && lando start"
+    "drupal": "cd packages/drupal && lando start",
+    "diff" : "lerna diff",
+    "test": "lerna run test --scope '{vuer-fe, api}'"
   },
   "devDependencies": {
     "lerna": "^4.0.0",
@@ -23,5 +26,6 @@
     "express": "^4.17.3",
     "puppeteer": "^13.5.1",
     "socket.io": "^4.4.1"
-  }
+  },
+  "workspaces": ["@webol/api", "@webol/vuer-fe"]
 }

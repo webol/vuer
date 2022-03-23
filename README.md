@@ -75,10 +75,10 @@ cp scripts/vscode/launch.json .vscode
 Start Drupal:
 
 ```bash
-npm run start
+npm run drupal
 ```
 
-Run the app:
+Start the the Vuer app:
 
 ```bash
 npm run serve
@@ -130,17 +130,17 @@ lando site-setup
 - `lint`: Runs lint on all packages
 - `lint:fix`: Runs `lint --fix` on all packages
 - `serve <package>`: Runs `serve` on all packages. Accepts `<package>` parameter to target specific packages
-- `start`: Starts drupal development server. Requires lando to function
+- `drupal`: Starts drupal development server. Requires lando to function
 
 ### api package
 
-- `serve`: Starts express api server
+- `serve`: Starts Express api server
 
 ### vuer-fe package
 
 - `build`: Compiles and minifies outline client for production
 - `lint`: Lints and fixes outline client files
-- `serve`: Compiles and hot-reloads outline client for development
+- `serve`: Compiles and hot-reloads outline Vuer client for development
 
 ## Roadmap
 
