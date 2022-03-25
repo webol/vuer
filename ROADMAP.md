@@ -46,4 +46,4 @@
 ### Custom Icons for Outlines/Entries
 
 ### Questions
-Why is vuex not in package.json dependencies, (vuex-pathify is)
+Why are vue and vuex not in package.json dependencies, (vuex-pathify is)

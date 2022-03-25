@@ -60,7 +60,7 @@ tooling:
       - if [ -f "settings.php" ]; then mv settings.php web/sites/default; fi
       - if [ -f "settings.local.php" ]; then mv settings.local.php web/sites/default; fi
       - if [ -f "services.yml" ]; then mv services.yml web/sites/default; fi
-      - drush -y site-install standard --account-pass admin --site-name "Drupal Outline" --db-url mysql://drupal9:drupal9@database/drupal9
+      - drush -y site-install demo_umami --account-pass admin --site-name "Drupal Outline" --db-url mysql://drupal9:drupal9@database/drupal9
       - drush -y en content_moderation, media, media_library, workflows
       - drush -y en admin_toolbar, admin_toolbar_tools, admin_toolbar_links_access_filter, admin_toolbar_search
       - drush -y en ctools, devel, druxt, graphql, paragraphs, pathauto, token
